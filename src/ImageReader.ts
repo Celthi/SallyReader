@@ -49,32 +49,6 @@ class ImageReader {
         });
     }
 }
-const getImage = (chapterUrl: string, imageUrl: string, headers) => {
-
-    const options = buildOptions(chapterUrl, imageUrl, headers);
-    return new Promise((resolve, reject) => {
-        const request = http2.request(options, response => {
-            console.log('statusCode:', response.statusCode);
-            console.log('headers:', response.headers);
-            if (response.statusCode != 200 && response.statusCode != 304) {
-                reject(`get image response code is ${response.statusCode}`);
-            }
-            const body = [];
-            response.on('data', chunk => {
-                body.push(chunk);
-            });
-            response.on('end', () => {
-                resolve(Buffer.concat(body));
-            });
-        });
-
-        request.on('error', (e: Error) => {
-            console.error(e);
-            reject(e);
-        });
-        request.end(''); // send out the request
-    });
-}
 const readImages = async (chapterUrl, imageNodes, options) => {
     const imageReader = new ImageReader('https://learning.oreilly.com', options);
     imageNodes.forEach(async (element) => {
@@ -85,7 +59,7 @@ const readImages = async (chapterUrl, imageNodes, options) => {
             })
         }
         await pause(100);
-        imageReader.getImage(chapterUrl, imageUrl).then(image => {
+        imageReader.getImage(imageUrl, options).then(image => {
             const imgLocation = './books' + imageUrl;
             const folder = imgLocation.substring(0, imgLocation.lastIndexOf('/'));
             fs.mkdirSync(folder, { recursive: true });

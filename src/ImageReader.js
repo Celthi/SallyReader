@@ -89,30 +89,6 @@ var ImageReader = (function () {
     return ImageReader;
 }());
 exports.ImageReader = ImageReader;
-var getImage = function (chapterUrl, imageUrl, headers) {
-    var options = buildOptions(chapterUrl, imageUrl, headers);
-    return new Promise(function (resolve, reject) {
-        var request = http2.request(options, function (response) {
-            console.log('statusCode:', response.statusCode);
-            console.log('headers:', response.headers);
-            if (response.statusCode != 200 && response.statusCode != 304) {
-                reject("get image response code is " + response.statusCode);
-            }
-            var body = [];
-            response.on('data', function (chunk) {
-                body.push(chunk);
-            });
-            response.on('end', function () {
-                resolve(Buffer.concat(body));
-            });
-        });
-        request.on('error', function (e) {
-            console.error(e);
-            reject(e);
-        });
-        request.end('');
-    });
-};
 var readImages = function (chapterUrl, imageNodes, options) { return __awaiter(void 0, void 0, void 0, function () {
     var imageReader;
     return __generator(this, function (_a) {
@@ -131,7 +107,7 @@ var readImages = function (chapterUrl, imageNodes, options) { return __awaiter(v
                         return [4, pause(100)];
                     case 1:
                         _a.sent();
-                        imageReader.getImage(chapterUrl, imageUrl).then(function (image) {
+                        imageReader.getImage(imageUrl, options).then(function (image) {
                             var imgLocation = './books' + imageUrl;
                             var folder = imgLocation.substring(0, imgLocation.lastIndexOf('/'));
                             fs_1["default"].mkdirSync(folder, { recursive: true });
