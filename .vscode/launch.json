@@ -34,9 +34,9 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                //"${workspaceFolder}/test/**/*.ts"
+                "${workspaceFolder}/test/**/*.ts"
                 //"${workspaceFolder}/test/parseHtml.ts"
-                "${workspaceFolder}/test/index.ts"
+                //"${workspaceFolder}/test/index.ts"
 
             ],
             "internalConsoleOptions": "openOnSessionStart"

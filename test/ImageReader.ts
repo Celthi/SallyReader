@@ -30,6 +30,7 @@ describe('read a image', () => {
         const imageReader = new ImageReader(url, options);
         imageReader.getImage(imageUrl, options).then((image)=> {
             fs.writeFileSync('./tmp/imageReader.jpg', image);
+            imageReader.close();
         });
     });
 });

@@ -16,10 +16,9 @@ var url = 'https://learning.oreilly.com/library/view/head-first-design/059600712
 describe('axios test', function () {
     it('should pass', function () {
         axios_1["default"].get(url, config).then(function (res) {
-            fs.writeFileSync('./ch12.html', res.data, function (error) {
+            fs.writeFileSync('./tmp/ch12.html', res.data, function (error) {
                 console.log(error);
             });
-            console.log(res.data);
         })["catch"](function (error) {
             console.log(error);
         });

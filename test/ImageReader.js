@@ -30,7 +30,8 @@ describe('read a image', function () {
         };
         var imageReader = new ImageReader_1.ImageReader(url, options);
         imageReader.getImage(imageUrl, options).then(function (image) {
-            fs_1["default"].writeFileSync('./imageReader.jpg', image);
+            fs_1["default"].writeFileSync('./tmp/imageReader.jpg', image);
+            imageReader.close();
         });
     });
 });

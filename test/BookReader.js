@@ -52,7 +52,7 @@ describe('read book', function () {
                         }
                     };
                     _a = BookReader_1.chaptersFromBook;
-                    return [4, BookReader_1.readBookCover(bookUrl, options, './books/')];
+                    return [4, BookReader_1.readBookCover(bookUrl, options, './tmp/books/')];
                 case 1:
                     _a.apply(void 0, [_b.sent()]).forEach((function (element) {
                         console.log(element);

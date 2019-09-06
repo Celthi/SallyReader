@@ -21,6 +21,9 @@ class ImageReader {
             });
         });
     }
+    close() {
+        this.client.close();
+    }
 }
 const readImages = async (chapterUrl, imageNodes, options) => {
     // todo: use chapterUrl to get url

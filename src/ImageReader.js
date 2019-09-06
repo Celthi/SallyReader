@@ -61,6 +61,9 @@ var ImageReader = (function () {
             });
         });
     };
+    ImageReader.prototype.close = function () {
+        this.client.close();
+    };
     return ImageReader;
 }());
 exports.ImageReader = ImageReader;
