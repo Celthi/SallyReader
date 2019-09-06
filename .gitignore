@@ -7,7 +7,7 @@ coverage
 
 .DS_Store
 .cache
-.vscode
+
 .idea
 
 *.bak
