@@ -12,5 +12,5 @@ Written by Typescript.
 TODO
 ===
 - [ ] Don't read the images if they have been downloaded.
--[ ] resolve the http2 error after download some images.
--[ ] Maybe use password instead of cookie. 
+- [ ] resolve the http2 error after download some images.
+- [ ] Maybe use password instead of cookie. 
