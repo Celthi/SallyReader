@@ -12,10 +12,9 @@ const url = 'https://learning.oreilly.com/library/view/head-first-design/0596007
 describe('axios test', () => {
     it('should pass', () => {
         axios.get(url, config).then((res) => {
-            fs.writeFileSync('./ch12.html', res.data, (error:Error) => {
+            fs.writeFileSync('./tmp/ch12.html', res.data, (error:Error) => {
                 console.log(error);
             });
-            console.log(res.data);
         }).catch((error: Error) => {
             console.log(error);
         })
