@@ -38,7 +38,7 @@ describe('parse html to get jpg', () => {
         let images = dom.window.document.querySelectorAll('img');
         images.forEach((img) => {
             const imgUrl = baseUrl + img.src;
-            const imgLocation = './books' + img.src;
+            const imgLocation = './tmp/books' + img.src;
             const folder = imgLocation.substring(0, imgLocation.lastIndexOf('/'));
             fs.mkdirSync(folder, { recursive: true });
             console.log(`Trying to get image: ${imgUrl}`);

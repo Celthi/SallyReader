@@ -11,7 +11,7 @@ describe('read book', ()=> {
                 referer: 'https://learning.oreilly.com/home/'
             },
         }
-        chaptersFromBook(await readBookCover(bookUrl, options, './books/')).forEach((element => {
+        chaptersFromBook(await readBookCover(bookUrl, options, './tmp/books/')).forEach((element => {
             console.log(element);
         }));
     })
