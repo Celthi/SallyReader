@@ -5,7 +5,7 @@ import { parseChapterUrl } from './Chapter';
 import fs from 'fs';
 import { readImages } from './ImageReader';
 import { JSDOM, Options } from 'jsdom';
-
+import { pause } from './util/pause';
 // chapter url: 'https://learning.oreilly.com/library/view/head-first-design/0596007124/ch11.html';
 /*const options = {
     headers: {
@@ -15,16 +15,12 @@ import { JSDOM, Options } from 'jsdom';
     },
 } */
 
-const pause =(time: number) => {
-    return  new Promise((resolve, reject) => {
-        setTimeout(resolve, time);
-    })
-}
+
 const readChapter = async (chapterUrl: string, options, booksFolder: string) => {
     const chapter = parseChapterUrl(chapterUrl);
     const webSite = 'https://learning.oreilly.com';
-    await pause(1000);
-    const  chapterHtml = await axios.get(`${webSite}${chapter.chapterUrl}`, options);
+    await pause(1000 * 5/* s */);
+    const chapterHtml = await axios.get(`${webSite}${chapter.chapterUrl}`, options);
     const chapterData = chapterHtml.data;
     fs.writeFileSync(`${booksFolder}${chapter.book}/${chapter.chapterName}`, chapterData);
     // collect images

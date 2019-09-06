@@ -44,11 +44,7 @@ var Chapter_1 = require("./Chapter");
 var fs_1 = __importDefault(require("fs"));
 var ImageReader_1 = require("./ImageReader");
 var jsdom_1 = require("jsdom");
-var pause = function (time) {
-    return new Promise(function (resolve, reject) {
-        setTimeout(resolve, time);
-    });
-};
+var pause_1 = require("./util/pause");
 var readChapter = function (chapterUrl, options, booksFolder) { return __awaiter(void 0, void 0, void 0, function () {
     var chapter, webSite, chapterHtml, chapterData, dom, imageNodes;
     return __generator(this, function (_a) {
@@ -56,7 +52,7 @@ var readChapter = function (chapterUrl, options, booksFolder) { return __awaiter
             case 0:
                 chapter = Chapter_1.parseChapterUrl(chapterUrl);
                 webSite = 'https://learning.oreilly.com';
-                return [4, pause(1000)];
+                return [4, pause_1.pause(1000 * 5)];
             case 1:
                 _a.sent();
                 return [4, axios_1["default"].get("" + webSite + chapter.chapterUrl, options)];
