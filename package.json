@@ -22,7 +22,7 @@
   "scripts": {
     "test": "npm run test",
     "postinstall": "tsc -p .",
-    "watch": "tsc -w -p ."
+    "watch": "tsc"
   },
   "author": "",
   "license": "ISC"
