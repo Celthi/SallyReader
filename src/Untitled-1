@@ -1,0 +1,9 @@
+"TypeError [ERR_INVALID_HTTP_TOKEN]: Header name must be a valid HTTP token [":authority"]\n
+    at ClientRequest.setHeader (_http_outgoing.js:487:3)\n   
+     at new ClientRequest (_http_client.js:221:14)\n    at Object.request (https.js:309:10)\n  
+       at RedirectableRequest._performRequest (/Users/qingzhang/Documents/ts/node_modules/follow-redirects/index.js:169:24)\n 
+          at new RedirectableRequest (/Users/qingzhang/Documents/ts/node_modules/follow-redirects/index.js:66:8)\n    
+          at Object.wrappedProtocol.request (/Users/qingzhang/Documents/ts/node_modules/follow-redirects/index.js:307:14)\n   
+           at dispatchHttpRequest (/Users/qingzhang/Documents/ts/node_modules/axios/lib/adapters/http.js:180:25)\n    
+           at new Promise (<anonymous>)\n    at httpAdapter (/Users/qingzhang/Documents/ts/node_modules/axios/lib/adapters/http.js:20:10)\n  
+             at dispatchRequest (/Users/qingzhang/Documents/ts/node_modules/axios/lib/core/dispatchRequest.js:59:10)\n    at processTicksAndRejections (internal/process/task_queues.js:85:5)"

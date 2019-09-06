@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        //"outFile": "./built/local/tsc.js",
+        "sourceMap": true,
+        "esModuleInterop": true 
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
