@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { parseBookUrl } from './Books';
 import fs from 'fs';
-import { JSDOM, Options } from 'jsdom';
+import { JSDOM} from 'jsdom';
 
 // chapter url: 'https://learning.oreilly.com/library/view/head-first-design/0596007124/ch11.html';
 /*const options = {

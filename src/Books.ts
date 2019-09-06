@@ -25,7 +25,6 @@ const parseBookUrl = (bookUrl: string) => {
     } catch(error) {
         console.log(`parse book url: ${bookUrl} met error!`);
     }
-
     return book;
 }
 export {

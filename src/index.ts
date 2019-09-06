@@ -2,7 +2,6 @@
 
 import { chaptersFromBook, readBookCover } from './BookReader';
 import { readChapter } from './ChapterReader';
-
 const main = async () => {
     try {
         const bookUrl = 'https://learning.oreilly.com/library/view/head-first-design/0596007124/';
@@ -30,9 +29,9 @@ const main = async () => {
         };
         const booksFolder = './books/';
         const book = await readBookCover(bookUrl, options, booksFolder);
-        chaptersFromBook(book.html).forEach((chapterUrl) => {
-            readChapter(chapterUrl, options, booksFolder);
-        });
+        for (const chapterUrl of chaptersFromBook(book.html)) {
+            await readChapter(chapterUrl, options, booksFolder);
+        };
     } catch (error) {
         console.log(error);
     }

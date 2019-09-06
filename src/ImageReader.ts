@@ -1,6 +1,5 @@
 const http2 = require('http2-wrapper');
 import fs from 'fs';
-import { pause } from './util/pause';
 
 class ImageReader {
     client;
@@ -11,14 +10,20 @@ class ImageReader {
         return new Promise((resolve, reject) => {
             options = Object.assign({}, options);
             options.headers[':path'] = imageUrl;
-            const res = this.client.request(options.headers, options);
+            const req = this.client.request(options.headers, options);
             const body = [];
-            res.on('data', chunk => {
+            req.on('data', chunk => {
                 body.push(chunk);
             });
-            res.on('end', (pon) => {
+            req.setTimeout(50000, () => {
+                console.log('time out in 50s');
+            });
+            req.on('end', () => {        
                 resolve(Buffer.concat(body));
             });
+            req.on('error', (error)=> {
+                console.log(error.message);
+            })
         });
     }
     close() {
@@ -28,18 +33,19 @@ class ImageReader {
 const readImages = async (chapterUrl, imageNodes, options) => {
     // todo: use chapterUrl to get url
     const imageReader = new ImageReader('https://learning.oreilly.com', options);
-    imageNodes.forEach(async (element) => {
+    for(const element of imageNodes) {
         const imageUrl = element.src;
-
-        await pause(100);
-        imageReader.getImage(imageUrl, options).then(image => {
+        try {
+            const image = await imageReader.getImage(imageUrl, options);
             const imgLocation = './books' + imageUrl;
             const folder = imgLocation.substring(0, imgLocation.lastIndexOf('/'));
             fs.mkdirSync(folder, { recursive: true });
-            console.log(`Trying to get image: ${imageUrl}`);
+            console.log(`Get image: ${imageUrl}`);
             fs.writeFileSync(imgLocation, image);
-        });
-    });
+        } catch(error) {
+            console.log(error.message);
+        }
+    };
 }
 
 export { readImages, ImageReader }

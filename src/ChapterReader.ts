@@ -19,9 +19,9 @@ import { pause } from './util/pause';
 const readChapter = async (chapterUrl: string, options, booksFolder: string) => {
     const chapter = parseChapterUrl(chapterUrl);
     const webSite = 'https://learning.oreilly.com';
-    await pause(1000 * 5/* s */);
     const chapterHtml = await axios.get(`${webSite}${chapter.chapterUrl}`, options);
     const chapterData = chapterHtml.data;
+    console.log(`Finish reading chapter: ${chapterUrl}`);
     fs.writeFileSync(`${booksFolder}${chapter.book}/${chapter.chapterName}`, chapterData);
     // collect images
     const dom = new JSDOM(chapterData);
