@@ -8,3 +8,9 @@ Currently, it is aimed at my personal usage, so it won't run in your computer un
 
 
 Written by Typescript.
+
+TODO
+===
+- [ ] Don't read the images if they have been downloaded.
+-[ ] resolve the http2 error after download some images.
+-[ ] Maybe use password instead of cookie. 
