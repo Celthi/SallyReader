@@ -12,8 +12,8 @@ import { JSDOM} from 'jsdom';
     },
 } */
 
-const readBook = (bookUrl: string, options) => {
-    return axios.get(bookUrl, options);
+const readBook = (client, path: string, options) => {
+    return client.getRequest(path, options);
 }
 
 const chaptersFromBook = (bookHtml) => {
@@ -25,15 +25,15 @@ const chaptersFromBook = (bookHtml) => {
     })
     return chapterUrls;
 }
-const readBookCover = async (bookUrl: string, options, booksFolder: string) => {
+const readBookCover = async (client, bookUrl: string, options, booksFolder: string) => {
     let book = parseBookUrl(bookUrl);
-    let bookResponse = await readBook(bookUrl, options);
-    const bookFolder = `${booksFolder}${book.bookFolder}`;
-    const bookCover = `${bookFolder}${book.bookName}.html`;
+    let bookResponse = await readBook(client, book.path, options);
+    const bookFolder = `${booksFolder}${book.folder}`;
+    const bookCover = `${bookFolder}${book.name}.html`;
     fs.mkdirSync(bookFolder, { recursive: true });
     console.log(`read book: ${bookCover}`);
-    fs.writeFileSync(bookCover, bookResponse.data);
-    return {book, html: bookResponse.data};
+    fs.writeFileSync(bookCover, bookResponse);
+    return {book, html: bookResponse};
 }
 export {
     chaptersFromBook

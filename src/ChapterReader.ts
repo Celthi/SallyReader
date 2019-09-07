@@ -1,11 +1,9 @@
 'use strict';
 
-import axios from 'axios';
 import { parseChapterUrl } from './Chapter';
 import fs from 'fs';
 import { readImages } from './ImageReader';
 import { JSDOM, Options } from 'jsdom';
-import { pause } from './util/pause';
 // chapter url: 'https://learning.oreilly.com/library/view/head-first-design/0596007124/ch11.html';
 /*const options = {
     headers: {
@@ -16,17 +14,15 @@ import { pause } from './util/pause';
 } */
 
 
-const readChapter = async (chapterUrl: string, options, booksFolder: string) => {
+const readChapter = async (client, chapterUrl: string, options, booksFolder: string) => {
     const chapter = parseChapterUrl(chapterUrl);
-    const webSite = 'https://learning.oreilly.com';
-    const chapterHtml = await axios.get(`${webSite}${chapter.chapterUrl}`, options);
-    const chapterData = chapterHtml.data;
+    const chapterHtml = await client.getRequest(`${chapter.chapterUrl}`, options);
     console.log(`Finish reading chapter: ${chapterUrl}`);
-    fs.writeFileSync(`${booksFolder}${chapter.book}/${chapter.chapterName}`, chapterData);
+    fs.writeFileSync(`${booksFolder}${chapter.book}/${chapter.chapterName}`, chapterHtml);
     // collect images
-    const dom = new JSDOM(chapterData);
+    const dom = new JSDOM(chapterHtml);
     let imageNodes = dom.window.document.querySelectorAll('img');
-    await readImages(chapter.chapterUrl, imageNodes, options);
+    await readImages(client, chapter.chapterUrl, imageNodes, options);
 }
 
 export {

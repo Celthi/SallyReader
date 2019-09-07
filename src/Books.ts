@@ -11,16 +11,19 @@
 // book url: https://learning.oreilly.com/library/view/head-first-design/0596007124/
 const parseBookUrl = (bookUrl: string) => {
     const book = {
-        bookName: '',
-        bookSeq: '',
-        bookFolder: ''
+        name: '',
+        seq: '',
+        folder: '',
+        path: ''
+
     }
-    const re = /https:\/\/learning.oreilly.com\/library\/view\/([a-z-]+)\/(\d+)\//;
+    const re = /https:\/\/learning.oreilly.com(\/library\/view\/([a-z-]+)\/(\d+)\/)/;
     const matches = bookUrl.match(re);
     try {
-        book.bookName = matches[1];
-        book.bookSeq = matches[2];
-        book.bookFolder = book.bookName + '/';
+        book.name = matches[2];
+        book.seq = matches[3];
+        book.folder = book.name + '/';
+        book.path = matches[1]
 
     } catch(error) {
         console.log(`parse book url: ${bookUrl} met error!`);

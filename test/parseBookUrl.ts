@@ -6,9 +6,10 @@ describe('parse book', ()=> {
         const book = parseBookUrl('https://learning.oreilly.com/library/view/head-first-design/0596007124/');
         console.log(book);
         chai.assert.deepEqual(book, {
-            bookName:'head-first-design',
-            bookSeq: '0596007124',
-            bookFolder: 'head-first-design/'
+            name:'head-first-design',
+            seq: '0596007124',
+            folder: 'head-first-design/',
+            path: '/library/view/head-first-design/0596007124/'
         })
     });
     it('should parse chapter url', ()=> {

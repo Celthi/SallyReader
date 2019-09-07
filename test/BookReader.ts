@@ -1,6 +1,6 @@
 
 import {readBookCover, chaptersFromBook } from '../src/BookReader';
-
+import {Http2Request} from '../src/util/Http2Request';
 describe('read book', ()=> {
     it('should read book', async ()=> {
         const bookUrl = 'https://learning.oreilly.com/library/view/head-first-design/0596007124/';
@@ -11,8 +11,11 @@ describe('read book', ()=> {
                 referer: 'https://learning.oreilly.com/home/'
             },
         }
-        chaptersFromBook(await readBookCover(bookUrl, options, './tmp/books/')).forEach((element => {
+        const client = new Http2Request('https://learning.oreilly.com', options);
+
+        chaptersFromBook(await readBookCover(client, bookUrl, options, './tmp/books/')).forEach((element => {
             console.log(element);
         }));
+        client.close();
     })
 })

@@ -10,7 +10,7 @@ const config = {
 }
 const url = 'https://learning.oreilly.com/library/view/head-first-design/0596007124/ch12.html';
 describe('axios test', () => {
-    it('should pass', () => {
+    it.skip('should pass', () => {
         axios.get(url, config).then((res) => {
             fs.writeFileSync('./tmp/ch12.html', res.data, (error:Error) => {
                 console.log(error);

@@ -1,4 +1,4 @@
-import { ImageReader } from '../src/ImageReader';
+import { Http2Request } from '../src/util/Http2Request';
 import fs from 'fs';
 describe('read a image', () => {
     it('should read a image', () => {
@@ -27,10 +27,11 @@ describe('read a image', () => {
             }
         };
 
-        const imageReader = new ImageReader(url, options);
-        imageReader.getImage(imageUrl, options).then((image)=> {
+        const imageReader = new Http2Request(url, options);
+        imageReader.getRequest(imageUrl, options).then((image)=> {
             fs.writeFileSync('./tmp/imageReader.jpg', image);
             imageReader.close();
         });
+        imageReader.close();
     });
 });
