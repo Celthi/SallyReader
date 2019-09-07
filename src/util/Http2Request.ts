@@ -22,6 +22,7 @@ class Http2Request {
             });
             req.on('error', (error)=> {
                 console.log(error.message);
+                reject('error happen');
             })
             req.end();
         });
