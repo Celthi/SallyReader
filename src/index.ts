@@ -31,7 +31,9 @@ const main = async () => {
         }
     };
     const booksFolder = './books/';
-    const client = new Client(new Http2Request('https://learning.oreilly.com', options), checkExistingImages(booksFolder));
+    const processPaths =  checkExistingImages(booksFolder)
+    const client = new Client(new Http2Request('https://learning.oreilly.com', options), processPaths);
+    //const client =new Http2Request('https://learning.oreilly.com', options);
 
     try {
 

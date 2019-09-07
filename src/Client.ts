@@ -7,7 +7,7 @@ class Client {
         this.collection = collection;
     }
     getRequest(path, options) {
-        this.http2Request.getRequest(path, options);
+        return this.http2Request.getRequest(path, options);
     }
     add(path) {
         this.collection.add(path);
