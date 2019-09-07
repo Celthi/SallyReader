@@ -35,7 +35,11 @@ const main = async () => {
 
         const book = await readBookCover(client, bookUrl, options, booksFolder);
         for (const chapterUrl of chaptersFromBook(book.html)) {
+            try {
             await readChapter(client, chapterUrl, options, booksFolder);
+            } catch(error) {
+                console.log(error.message);
+            }
         };
         
     } catch (error) {

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { parseBookUrl } from './Books';
 import fs from 'fs';
 import { JSDOM} from 'jsdom';

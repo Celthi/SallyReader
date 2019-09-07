@@ -14,6 +14,7 @@ class Http2Request {
             });
             req.setTimeout(50000, () => {
                 console.log('time out in 50s');
+                reject('time out in 50s');
             });
 
             req.on('end', () => {        
