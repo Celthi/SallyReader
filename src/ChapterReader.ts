@@ -16,13 +16,16 @@ import { JSDOM, Options } from 'jsdom';
 
 const readChapter = async (client, chapterUrl: string, options, booksFolder: string) => {
     const chapter = parseChapterUrl(chapterUrl);
-    const chapterHtml = await client.getRequest(`${chapter.chapterUrl}`, options);
-    console.log(`Finish reading chapter: ${chapterUrl}`);
-    fs.writeFileSync(`${booksFolder}${chapter.book}/${chapter.chapterName}`, chapterHtml);
-    // collect images
-    const dom = new JSDOM(chapterHtml);
-    let imageNodes = dom.window.document.querySelectorAll('img');
-    await readImages(client, chapter.chapterUrl, imageNodes, options);
+    if (!client.has(chapter.chapterUrl)) {
+        const chapterHtml = await client.getRequest(`${chapter.chapterUrl}`, options);
+        console.log(`Finish reading chapter: ${chapter.chapterUrl}`);
+        fs.writeFileSync(`${booksFolder}${chapter.book}/${chapter.chapterName}`, chapterHtml);
+        // collect images
+        const dom = new JSDOM(chapterHtml);
+        let imageNodes = dom.window.document.querySelectorAll('img');
+        await readImages(client, chapter.chapterUrl, imageNodes, options);
+        client.add(chapter.chapterUrl);
+    }
 }
 
 export {
